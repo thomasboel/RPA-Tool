@@ -31,8 +31,6 @@ public class OpenCalculatorRobotTest {
          * Script - Workflow
          */
         robot.resetMousePosition();
-            // TODO I have to call moveMouseTo() twice for it to work, figure out how to use a moveMouse method that works for multiple monitor setups.
-        robot.moveMouseTo(screenObject.getStartButton());
         robot.clickOnComponent(screenObject.getStartButton());
         robot.typeString("calculator");
         robot.keyPress(KeyEvent.VK_ENTER);

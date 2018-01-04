@@ -34,9 +34,22 @@ public class TestRobot {
           Robot Script
          */
         robot.resetMousePosition();
+        openCalculator(robot, screenObject);
+        performCalculation(robot, 47, 36);
+        performCalculation(robot, 1453, 34532);
+        performCalculation(robot, 2, 2);
+    }
+
+    private void openCalculator(RPARobot robot, ScreenObject screenObject) {
         robot.clickOnComponent(screenObject.getStartButton());
         robot.typeString("calculator");
         robot.keyPress(KeyEvent.VK_ENTER);
-        robot.typeStringManual("5*5");
+        robot.delay(500);
+    }
+
+    private void performCalculation(RPARobot robot, int a, int b) {
+        robot.typeStringManual(a + "+" + b);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.delay(50);
     }
 }

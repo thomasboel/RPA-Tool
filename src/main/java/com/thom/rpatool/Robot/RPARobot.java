@@ -5,7 +5,7 @@ import com.thom.rpatool.Event.EventPublisher;
 import com.thom.rpatool.Event.Robot.*;
 import com.thom.rpatool.Screen.ScreenCapture;
 import com.thom.rpatool.Screen.ScreenReader;
-import com.thom.rpatool.Util.LogUtil;
+import com.thom.rpatool.Util.RobotUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,9 +45,12 @@ public class RPARobot {
         this(robot, 1000);
     }
 
+    /*
+        ========== FUNCTIONALITY METHODS ==========
+     */
+
     /**
      * Moves the mouse to the specified gui component.
-     * @param component The gui component to move the mouse to
      */
     public void moveMouseTo(GuiComponent component) {
         minorDelay();
@@ -56,7 +59,6 @@ public class RPARobot {
 
     /**
      * Moves the mouse to, and left-clicks the specified gui component.
-     * @param component The gui component to move to and click
      */
     public void clickOnComponent(GuiComponent component) {
         moveMouseTo(component);
@@ -65,60 +67,10 @@ public class RPARobot {
 
     /**
      * Moves the mose to, and double-clicks the specified gui component.
-     * @param component The gui component to move to and double click
      */
     public void doubleClickOnComponent(GuiComponent component) {
         moveMouseTo(component);
         doubleClick();
-    }
-
-    /**
-     * Clicks on mouse-button 1 (typically left click).
-     */
-    public void leftClick() {
-        minorDelay();
-        robot.mousePress(InputEvent.BUTTON1_MASK);
-        robot.mouseRelease(InputEvent.BUTTON1_MASK);
-    }
-
-    /**
-     * Clicks on mouse-button 2 (typically right click).
-     */
-    public void rightClick() {
-        minorDelay();
-        robot.mousePress(InputEvent.BUTTON2_MASK);
-        robot.mouseRelease(InputEvent.BUTTON2_MASK);
-    }
-
-    /**
-     * Double clicks mouse button 1 (typically left click).
-     */
-    public void doubleClick() {
-        leftClick();
-        leftClick();
-    }
-
-    /**
-     * Moves the mouse to (0, 0).
-     */
-    public void resetMousePosition() {
-        LogUtil.info("Mouse Reset...");
-        moveMouse(50, 50);
-    }
-
-    /**
-     * Adds a minor delay of 25 ms, for gui components to update.
-     */
-    public void minorDelay() {
-        delay(25);
-    }
-
-    /**
-     * Adds a delay of a given time period in ms.
-     * @param delay
-     */
-    public void delay(int delay) {
-        robot.delay(delay);
     }
 
     // TODO Implement logic (use of GuiComponentUpdateEvent, or some other sort of event handling)
@@ -134,7 +86,7 @@ public class RPARobot {
     }
 
     /**
-     * Sets the clipboard contents to the string and prints it using ctrl+v.
+     * Sets the clipboard contents to the string and prints it using the paste functionality (ctrl+v).
      */
     public void typeString(String str) {
         minorDelay();
@@ -148,29 +100,68 @@ public class RPARobot {
         keyPress(KeyEvent.VK_V);
         keyRelease(KeyEvent.VK_V);
         keyRelease(KeyEvent.VK_CONTROL);
+
+        EventPublisher.raiseEvent(new StringTypedEvent(str));
     }
 
     /**
-     * Converts the String to an int[] of keycodes and then presses each individual key - !!!NOTE!!!: SLOWER than typeString()
+     * Converts the String to an int[] of keycodes and then presses each individual key.
+     * If all needed is to write text, use typeString(String) instead.
      */
     public void typeStringManual(String str) {
         minorDelay();
-        int[] keycodeMap = mapStringToKeyCodes(str);
 
-        for (int keycode : keycodeMap) {
+        for (int keycode : RobotUtil.mapStringToKeyCodes(str)) {
             keyPress(keycode);
             keyRelease(keycode);
         }
     }
 
-    private int[] mapStringToKeyCodes(String str) {
-        char[] input = str.toCharArray();
-        int[] keyCodes = new int[input.length];
+    /**
+     * Moves the mouse to (50, 50).
+     */
+    public void resetMousePosition() {
+        moveMouse(50, 50);
+    }
 
-        for (int i = 0; i < input.length; i++) {
-            keyCodes[i] = KeyEvent.getExtendedKeyCodeForChar(input[i]);
-        }
-        return keyCodes;
+    /**
+     * Adds a minor delay of 25 ms, for gui components to update.
+     */
+    public void minorDelay() {
+        delay(25);
+    }
+
+    public void leftClick() {
+        mouseClick(InputEvent.BUTTON1_MASK);
+    }
+
+    public void rightClick() {
+        mouseClick(InputEvent.BUTTON2_MASK);
+    }
+
+    public void middleClick() {
+        mouseClick(InputEvent.BUTTON3_MASK);
+    }
+
+    public void doubleClick() {
+        leftClick();
+        leftClick();
+    }
+
+    private void mouseClick(int button) {
+        minorDelay();
+        mousePress(button);
+        mouseRelease(button);
+    }
+
+    private void mousePress(int button) {
+        robot.mousePress(button);
+        EventPublisher.raiseEvent(new MousePressedEvent(button));
+    }
+
+    private void mouseRelease(int button) {
+        robot.mouseRelease(button);
+        EventPublisher.raiseEvent(new MouseReleasedEvent(button));
     }
 
     public void keyPress(int keycode) {
@@ -189,5 +180,9 @@ public class RPARobot {
         minorDelay();
         robot.mouseMove(x, y);
         EventPublisher.raiseEvent(new MouseMovedEvent(x, y));
+    }
+
+    public void delay(int delay) {
+        robot.delay(delay);
     }
 }

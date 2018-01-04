@@ -23,4 +23,19 @@ public class RobotEventHandler {
     public void onRobotMouseMove(MouseMovedEvent event) {
         LogUtil.info("Mouse moved to (" + event.getXPos() + "," + event.getYPos() + ")");
     }
+
+    @EventHandler
+    public void onRobotMouseButtonPress(MousePressedEvent event) {
+        LogUtil.info("Mouse button " + event.getButton() + " pressed");
+    }
+
+    @EventHandler
+    public void onRobotMouseButtonRelease(MouseReleasedEvent event) {
+        LogUtil.info("Mouse button " + event.getButton() + " released");
+    }
+
+    @EventHandler
+    public void onRobotTypeString(StringTypedEvent event) {
+        LogUtil.info("String typed using paste functionality: " + event.getString());
+    }
 }
