@@ -11,4 +11,5 @@ public class EventReference {
     public static final String STRING_TYPED_EVENT = "String Typed Event";
     public static final String MOUSE_PRESSED_EVENT = "Mouse Pressed Event";
     public static final String MOUSE_RELEASED_EVENT = "Mouse Released Event";
+    public static final String DELAY_EVENT = "Delay Event";
 }

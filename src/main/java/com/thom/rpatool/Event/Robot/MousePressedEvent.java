@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 public class MousePressedEvent extends Event {
     @Getter
-    private int button;
+    private final int button;
 
     public MousePressedEvent(int button) {
         super(EventReference.MOUSE_PRESSED_EVENT);

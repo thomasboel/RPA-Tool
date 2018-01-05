@@ -38,4 +38,9 @@ public class RobotEventHandler {
     public void onRobotTypeString(StringTypedEvent event) {
         LogUtil.info("String typed using paste functionality: " + event.getString());
     }
+
+    @EventHandler
+    public void onRobotDelayTriggered(DelayEvent event) {
+
+    }
 }

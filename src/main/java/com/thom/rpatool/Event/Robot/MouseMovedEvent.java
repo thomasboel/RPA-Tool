@@ -10,9 +10,9 @@ import lombok.Getter;
  */
 public class MouseMovedEvent extends Event {
     @Getter
-    private int xPos;
+    private final int xPos;
     @Getter
-    private int yPos;
+    private final int yPos;
 
     public MouseMovedEvent(int xPos, int yPos) {
         super(EventReference.MOUSE_MOVED_EVENT);

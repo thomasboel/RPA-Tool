@@ -6,14 +6,14 @@ import lombok.Getter;
 
 /**
  * @author Thomas Boel Micheelsen
- * Created 1/3/2018
+ * Created 1/5/2018
  */
-public class StringTypedEvent extends Event {
+public class DelayEvent extends Event {
     @Getter
-    private final String string;
+    private final int delay;
 
-    public StringTypedEvent(String str) {
-        super(EventReference.STRING_TYPED_EVENT);
-        this.string = str;
+    public DelayEvent(int delay) {
+        super(EventReference.DELAY_EVENT);
+        this.delay = delay;
     }
 }

@@ -34,7 +34,7 @@ public class RPARobot {
      */
     public RPARobot(Robot robot, int startupDelay) {
         this.robot = robot;
-        robot.delay(startupDelay);
+        delay(startupDelay);
     }
 
     /**
@@ -184,5 +184,6 @@ public class RPARobot {
 
     public void delay(int delay) {
         robot.delay(delay);
+        EventPublisher.raiseEvent(new DelayEvent(delay));
     }
 }
