@@ -1,5 +1,6 @@
-package com.thom.rpatool.Designer;
+package com.thom.rpatool.Designer.Sample;
 
+import com.thom.rpatool.Designer.Step;
 import com.thom.rpatool.Event.Reference.EventReference;
 
 import javax.swing.*;
@@ -60,7 +61,7 @@ public class GuiPerformStep extends JFrame {
         panel.add(keyList);
 
         addStep.addActionListener(e -> {
-            designer.stepList.add(new Step("Key Click: " + keyList.getSelectedItem().toString()).setEvent(EventReference.KEY_PRESSED_EVENT));
+            designer.stepList.add(new Step("Key Click: " + keyList.getSelectedItem().toString(), EventReference.KEY_PRESSED_EVENT));
             designer.putWorkflowComponents();
             dispose();
         });
@@ -68,7 +69,7 @@ public class GuiPerformStep extends JFrame {
 
     private void drawMouseClick() {
         addStep.addActionListener(e -> {
-            designer.stepList.add(new Step("Mouse Click").setEvent(EventReference.MOUSE_PRESSED_EVENT));
+            designer.stepList.add(new Step("Mouse Click", EventReference.MOUSE_PRESSED_EVENT));
             designer.putWorkflowComponents();
             dispose();
         });
@@ -76,7 +77,7 @@ public class GuiPerformStep extends JFrame {
 
     private void drawMouseMove() {
         addStep.addActionListener(e -> {
-            designer.stepList.add(new Step("Mouse Move").setEvent(EventReference.MOUSE_MOVED_EVENT));
+            designer.stepList.add(new Step("Mouse Move", EventReference.MOUSE_MOVED_EVENT));
             designer.putWorkflowComponents();
             dispose();
         });

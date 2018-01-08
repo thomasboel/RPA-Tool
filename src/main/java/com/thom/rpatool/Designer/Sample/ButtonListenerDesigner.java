@@ -1,4 +1,4 @@
-package com.thom.rpatool.Designer;
+package com.thom.rpatool.Designer.Sample;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

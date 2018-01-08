@@ -1,4 +1,6 @@
-package com.thom.rpatool.Designer;
+package com.thom.rpatool.Designer.Sample;
+
+import com.thom.rpatool.Designer.Step;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

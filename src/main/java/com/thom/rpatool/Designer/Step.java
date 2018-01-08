@@ -1,5 +1,6 @@
 package com.thom.rpatool.Designer;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -9,7 +10,8 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
+@AllArgsConstructor
 public class Step {
     private final String name;
-    private String event;
+    private final String event;
 }
