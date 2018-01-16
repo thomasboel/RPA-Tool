@@ -25,7 +25,8 @@ public class MenuBarItemMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        System.out.println("Component position: (" + component.getX() + ", " + component.getY() + ")");
+//        GuiUtil.
     }
 
     @Override
@@ -40,21 +41,11 @@ public class MenuBarItemMouseListener implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        switch (action) {
-            case "menu": {
-                component.setIcon(ImageUtil.getScaledImageIcon(imagePath + "_hover.png", 50, 50));
-                break;
-            }
-        }
+        component.setIcon(ImageUtil.getScaledImageIcon(imagePath + "_hover.png", 50, 50));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        switch (action) {
-            case "menu": {
-                component.setIcon(ImageUtil.getScaledImageIcon(imagePath + ".png", 50, 50));
-                break;
-            }
-        }
+        component.setIcon(ImageUtil.getScaledImageIcon(imagePath + ".png", 50, 50));
     }
 }

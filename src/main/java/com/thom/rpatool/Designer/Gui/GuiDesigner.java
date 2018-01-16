@@ -92,6 +92,8 @@ public class GuiDesigner extends JFrame {
 
     private void drawScreen() {
         drawMenuBar();
+
+        // Edit ViewMode
         drawWorkflow();
         drawEmulator();
         drawStepSelect();
@@ -103,6 +105,10 @@ public class GuiDesigner extends JFrame {
 
         GuiUtil.addRigidBox(panel, 80, 15);
         GuiUtil.addMenuBarItem(panel, "menu_hor", "menu");
+
+        // ViewMode Selectors . . .
+        GuiUtil.addRigidBox(panel, 80, 15);
+        GuiUtil.addMenuBarItem(panel, "menu_view_edit", "view_edit");
     }
 
     private void drawWorkflow() {
@@ -113,6 +119,7 @@ public class GuiDesigner extends JFrame {
         panel.add(new JLabel("Step 03"));
     }
 
+    // TODO Google that shit
     private void drawEmulator() {
         panel = panel_emulator;
 
@@ -123,7 +130,7 @@ public class GuiDesigner extends JFrame {
 
         GuiUtil.addRigidBox(panel, panel.getWidth()/2, 30);
 
-        JComboBox stepSelector = new JComboBox(StepRegistry.getStepListDisplay().toArray());
+        JComboBox<Object> stepSelector = new JComboBox<>(StepRegistry.getStepListDisplay().toArray());
         stepSelector.setMaximumSize(new Dimension(panel.getWidth()-40, 30));
         stepSelector.setEditable(false);
         stepSelector.setAlignmentX(Component.CENTER_ALIGNMENT);
